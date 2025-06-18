@@ -1,0 +1,32 @@
+.x {
+  animation: x var(--x-speed) linear infinite alternate;
+}
+.y {
+  animation: y var(--y-speed) linear infinite alternate;
+}
+
+.dot {
+  border-radius: 50%;
+  height: var(--width);
+  width: var(--width);
+  
+}
+
+.cover {
+  background: rgb(0, 0, 0);
+}
+
+.reveal {
+  box-shadow:0 0 0 900px #b3d1e0;
+}
+
+@keyframes x {
+  100% {
+    transform: translateX(calc(100vw - var(--width)));
+  }
+}
+@keyframes y {
+  100% {
+    transform: translateY(calc(100vh - var(--width)));
+  }
+}

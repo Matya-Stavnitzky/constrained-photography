@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import UnconstrainedCamFullScreen from "./components/UnconstrainedCameraFullScreen";
 import ZoomedViewFinder from "./components/ZoomedViewFinder";
 import PhotoDiary from "./components/PhotoDiary";
-import DiaryDisplayPage from "./components/DiaryDisplayPage";
+// import DiaryDisplayPage from "./components/DiaryDisplayPage";
 import SelectionPage from "./components/SelectionPage";
 import RovingDots from "./components/RovingDotPhoto";
 import RovingVeiw from "./components/RovingView";
@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Route path="/UnconstrainedCam" element={<UnconstrainedCamFullScreen />} />
         <Route path="/ZoomedViewFinder" element={<ZoomedViewFinder />} />
         <Route path="/PhotoDiary" element={<PhotoDiary />} />
-        <Route path="/DiaryDisplayPage" element={<DiaryDisplayPage />} />
+        {/* <Route path="/DiaryDisplayPage" element={<DiaryDisplayPage />} /> */}
         <Route path="/RovingDot" element={<RovingDots />} />
         <Route path="/RovingView" element={<RovingVeiw />} />
         <Route path="/TinyViewfinder" element={<TinyViewFinder/>} />

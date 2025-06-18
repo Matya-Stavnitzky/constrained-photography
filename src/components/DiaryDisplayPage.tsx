@@ -29,10 +29,11 @@ const ReturnButton = styled.button`
 
 type DiaryDisplayPageProps = {
   setImageDisplay: Dispatch<SetStateAction<boolean>>;
-  image: string;
+  takenPhotos: { current: string[] }
 }
 
-const DiaryDisplayPage: React.FC<DiaryDisplayPageProps> = ({setImageDisplay, image}) => {
+const DiaryDisplayPage: React.FC<DiaryDisplayPageProps> = ({setImageDisplay}) => {
+  
   function stopRecording() {
     console.log("Recording stopped");
     setReturnIsVisible(true);
@@ -76,7 +77,7 @@ const DiaryDisplayPage: React.FC<DiaryDisplayPageProps> = ({setImageDisplay, ima
         </ReturnButton>
       )}
       <Img
-        src={image}
+        // src={image}
         alt="Captured"
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
       />

@@ -12,12 +12,15 @@ import Test from "./components/test";
 import TinyViewFinder from "./components/TinyViewFinder";
 import BugViewFinder from "./components/BugViewFinder";
 import "./styles/global.css";
+import SetUpPage from "./experimentPages/SetUpPage";
+import Experiment from "./Experiment";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SelectionPage/>} />
+        {/* <Route path="/" element={<SelectionPage/>} /> */}
+        <Route path="/" element={<Experiment/>} />
         <Route path="/UnconstrainedCam" element={<UnconstrainedCamFullScreen />} />
         <Route path="/ZoomedViewFinder" element={<ZoomedViewFinder />} />
         <Route path="/PhotoDiary" element={<PhotoDiary />} />

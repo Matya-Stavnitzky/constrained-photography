@@ -12,8 +12,7 @@ import Test from "./components/test";
 import TinyViewFinder from "./components/TinyViewFinder";
 import BugViewFinder from "./components/BugViewFinder";
 import "./styles/global.css";
-import SetUpPage from "./experimentPages/SetUpPage";
-import Experiment from "./Experiment";
+import Experiment from "./MainExperiment";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

@@ -5,7 +5,6 @@ import UnconstrainedCamFullScreen from "./components/UnconstrainedCameraFullScre
 import ZoomedViewFinder from "./components/ZoomedViewFinder";
 import PhotoDiary from "./components/PhotoDiary";
 // import DiaryDisplayPage from "./components/DiaryDisplayPage";
-import SelectionPage from "./components/SelectionPage";
 import RovingDots from "./components/RovingDotPhoto";
 import RovingVeiw from "./components/RovingView";
 import Test from "./components/test";

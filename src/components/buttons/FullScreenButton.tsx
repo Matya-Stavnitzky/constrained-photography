@@ -4,8 +4,11 @@ import styled from "styled-components";
 const Button = styled.button`
   position: absolute;
   z-index: 11;
-  top: 50%;
-  left: 50%;
+  background: transparent;
+  border: none !important;
+  font-size:0;
+  height:100%; 
+  width:100%;
 `;
 
 interface FullscreenButtonProps {

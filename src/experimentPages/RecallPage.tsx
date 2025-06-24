@@ -19,7 +19,7 @@ const RecallPage: React.FC<RecallPageProps> = ({ setVisiblePage }) => {
     <>
       <CenteringDiv>
         <h1>Recall Task</h1>
-        <p>Please write the names of as many items as you can remember</p>
+        <p>Please write the names of as many items as you can remember. If you cannot remember the name of an item you can describe the item.</p>
         <textarea
           rows={20}
           cols={50}

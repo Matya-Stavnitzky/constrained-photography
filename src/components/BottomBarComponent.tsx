@@ -8,6 +8,13 @@ import styled from "styled-components";
 // import { useNavigate } from "react-router-dom";
 import { type CameraType } from "react-camera-pro";
 import TakePhotoButton from "./buttons/TakePhotoButton";
+import { storage } from "../config/firebase";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  type StorageReference,
+} from "firebase/storage";
 
 const BottomBar = styled.div`
   position: absolute;
@@ -53,6 +60,10 @@ type BottomBarComponentProps = {
   thumbNailFunction?: () => void;
   takePhotoFunction?: () => void;
   changeCameraFunction?: () => void;
+  participantId: string;
+  sessionId: string;
+  logging: boolean;
+  itemId: string;
 };
 
 const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
@@ -62,11 +73,35 @@ const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
   thumbNailFunction,
   takePhotoFunction,
   changeCameraFunction,
+  participantId,
+  sessionId,
+  logging,
+  itemId,
 }) => {
   const [image, setImage] = useState<string | ImageData | undefined | null>(
     null
   ); //image to be displayed in the thumbnail
   const camera = passedCamera; //access to the camera so photos can be saved
+
+  //STORING IMAGEs IN FIREBASE
+  // Get a reference to the storage service, which is used to create references in your storage bucket
+  const storage = getStorage();
+  const storageRef = ref(storage);
+  // Create a storage reference from our storage service
+  const imagesRefName = `participant-${participantId}-session-${sessionId}-item-${itemId}`;
+
+  const savePhoto = (
+    photo: string,
+    photonum: number,
+    imagesRefName: string
+  ) => {
+    // Create a reference to 'images/photo.jpg'
+    const photoRef = ref(storageRef, `${imagesRefName}-${photonum}.jpg`);
+
+    uploadString(photoRef, photo).then((snapshot) => {
+      console.log("Uploaded a raw string!");
+    });
+  };
 
   // Provide a default if thumbNailFunction is not passed
   const handleThumbNailClick =
@@ -83,11 +118,15 @@ const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
       const photo = camera.current?.takePhoto() as string; //get photo from camera
       takenPhotos.current.push(photo); //add to array
       setImage(photo); //set photo thumbnail to the last photo taken
+
+      savePhoto(photo, logging, takenPhotos.current.length, imagesRefName); //save photo to firebase
     });
 
-  const handleSwitchCamera = changeCameraFunction ?? (() => {
+  const handleSwitchCamera =
+    changeCameraFunction ??
+    (() => {
       camera.current?.switchCamera();
-  })
+    });
 
   return (
     <>

@@ -6,7 +6,6 @@ import { addDoc, collection, query, where, getDocs } from "firebase/firestore";
 import ExperimentPage from "./experimentPages/ExperimentPage";
 import DistractorPage from "./experimentPages/DistractorPage";
 import RecallPage from "./experimentPages/RecallPage";
-import { Camera } from "react-camera-pro";
 import FullscreenButton from "./components/buttons/FullScreenButton";
 
 /**

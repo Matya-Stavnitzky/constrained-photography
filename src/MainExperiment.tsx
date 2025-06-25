@@ -144,6 +144,8 @@ const Experiment = () => {
             itemOrder={itemOrder.current}
             itemPhotography={itemPhotography.current}
             nextPage={setVisiblePage}
+            participantId={userId.current}
+            sessionId={sessionId.current}
           ></ExperimentPage>
         </>
       )}

@@ -28,6 +28,8 @@ type ExperimentPageProps = {
   itemOrder: number[] | string[];
   itemPhotography: boolean[];
   nextPage: React.Dispatch<React.SetStateAction<string>>;
+  participantId?: string;
+  sessionId?: string;
 };
 
 const ExperimentPage: React.FC<ExperimentPageProps> = ({
@@ -35,14 +37,12 @@ const ExperimentPage: React.FC<ExperimentPageProps> = ({
   itemOrder,
   itemPhotography,
   nextPage,
+  participantId,
+  sessionId,
 }) => {
   const [idx, setIdx] = React.useState(0);
   const [page, setPage] = React.useState("prompt");
 
-  if (logging) {
-    console.log("TODO: Implement logging functionality for pictures");
-    
-  } 
   return (
     <>
       {page === "prompt" && (
@@ -75,9 +75,14 @@ const ExperimentPage: React.FC<ExperimentPageProps> = ({
 
       {page === "photograph" && (
         <>
-          <UnconstrainedCam></UnconstrainedCam>
+          <UnconstrainedCam 
+          logging={logging}
+            participantId={participantId}
+            sessionId={sessionId}
+            itemId={itemOrder.at(idx)?.toString() || ""}
+          ></UnconstrainedCam>
           {continueExperiment(setIdx, idx, itemOrder, setPage, nextPage)}
-          {/* TODO: add logging functionality here */}
+          {/* Could get screenshot here instead of logging the photo that was taken */}
         </>
       )}
     </>

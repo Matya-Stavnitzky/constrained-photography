@@ -8,12 +8,11 @@ import styled from "styled-components";
 // import { useNavigate } from "react-router-dom";
 import { type CameraType } from "react-camera-pro";
 import TakePhotoButton from "./buttons/TakePhotoButton";
-import { storage } from "../config/firebase";
 import {
+  getDownloadURL,
   getStorage,
   ref,
   uploadString,
-  type StorageReference,
 } from "firebase/storage";
 
 const BottomBar = styled.div`
@@ -60,10 +59,10 @@ type BottomBarComponentProps = {
   thumbNailFunction?: () => void;
   takePhotoFunction?: () => void;
   changeCameraFunction?: () => void;
-  participantId: string;
-  sessionId: string;
+  participantId?: string;
+  sessionId?: string;
   logging: boolean;
-  itemId: string;
+  itemId?: string;
 };
 
 const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
@@ -88,7 +87,7 @@ const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
   const storage = getStorage();
   const storageRef = ref(storage);
   // Create a storage reference from our storage service
-  const imagesRefName = `participant-${participantId}-session-${sessionId}-item-${itemId}`;
+  const imagesRefName = `s-${sessionId}-p-${participantId}/i-${itemId}`;
 
   const savePhoto = (
     photo: string,
@@ -98,8 +97,16 @@ const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
     // Create a reference to 'images/photo.jpg'
     const photoRef = ref(storageRef, `${imagesRefName}-${photonum}.jpg`);
 
-    uploadString(photoRef, photo).then((snapshot) => {
-      console.log("Uploaded a raw string!");
+    console.log("photo is:", photo);
+    uploadString(photoRef, photo, "data_url").then(() => {
+      console.log("Uploaded a photo (format data_url)!");
+    });
+
+    const storage = getStorage();
+    getDownloadURL(ref(storage, photoRef.fullPath)).then((url) => {
+      // `url` is the download URL for 'images/stars.jpg'
+      // This can be used to display the image in an <img> tag or as a CSS background
+      console.log("Download URL:", url);
     });
   };
 
@@ -119,7 +126,9 @@ const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
       takenPhotos.current.push(photo); //add to array
       setImage(photo); //set photo thumbnail to the last photo taken
 
-      savePhoto(photo, logging, takenPhotos.current.length, imagesRefName); //save photo to firebase
+      if (logging) {
+        savePhoto(photo, takenPhotos.current.length, imagesRefName); //save photo to firebase
+      }
     });
 
   const handleSwitchCamera =

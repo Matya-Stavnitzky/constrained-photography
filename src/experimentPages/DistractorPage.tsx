@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, type Dispatch, type SetStateAction } from "react";
+import { useRef, useState, type Dispatch, type SetStateAction } from "react";
 import CenteringDiv from "../components/CenteringDiv";
-import sleep from "../components/sleep";
+import MyTimer from "../components/timer";
 
 const MathQuestion = () => {
   const [num1, setNum1] = useState<number>(Math.floor(Math.random() * 13));
@@ -34,14 +34,14 @@ type DistractorPageProps = {
 const DistractorPage: React.FC<DistractorPageProps> = ({ setVisiblePage }) => {
   const [distractorNav, setDistractorNav] = useState<string>("EndVeiwing");
 
-//   the amount of time to do this task
-  useEffect(() => {
-    if (distractorNav === "distractorTask") {
-      sleep(10).then(() => {
-        setVisiblePage("recall");
-      });
-    }
-  }, [distractorNav, setVisiblePage]);
+// //   the amount of time to do this task
+//   useEffect(() => {
+//     if (distractorNav === "distractorTask") {
+//       sleep(10).then(() => {
+//         setVisiblePage("recall");
+//       });
+//     }
+//   }, [distractorNav, setVisiblePage]);
 
   return (
     <>
@@ -62,6 +62,7 @@ const DistractorPage: React.FC<DistractorPageProps> = ({ setVisiblePage }) => {
       {distractorNav === "distractorTask" && (
         <CenteringDiv>
           <h1>Please answer as many questions as you can</h1>
+          <MyTimer timeS={30} onExpire={() => setVisiblePage("recall")}></MyTimer>
           <MathQuestion></MathQuestion>
         </CenteringDiv>
       )}

@@ -23,16 +23,26 @@ const InstructionPage: React.FC<CenteredPageProps> = ({ setVisiblePage }) => {
               gallery and look at items. The phone will vibrate and a prompt
               will appear on the screen when you should move to the next item.
               At each item you will be asked to either observe it or take a
-              picture of it. At the end of the experiment you will be asked to
-              remember what you saw (the names of the items you saw?).
+              picture. At the end of the experiment you will be asked to
+              remember the names of the items you saw.
             </p>
-            <p>You can opt out of the study at any point (ethics info here)</p>
+            <p>
+              You may decide to withdraw during the session by informing the
+              facilitator or principal investigator and/or exiting the session
+              software.
+            </p>
+            <p>
+              If you wish to withdraw your data after completing a session,
+              please contact the facilitator or principal investigator. Note it
+              may not be possible to withdraw your data if your data has been
+              anonymized or already included in analysis.
+            </p>
             <p>
               When you are ready, click the button below to start an example
               item
             </p>
             <button
-              onClick={() => InstructionPageNavigation("exampleExperimenet")}
+              onClick={() => InstructionPageNavigation("exampleExperiment")}
             >
               Start Example
             </button>
@@ -40,50 +50,37 @@ const InstructionPage: React.FC<CenteredPageProps> = ({ setVisiblePage }) => {
         </>
       )}
 
-      {visiblePage === "exampleExperimenet" && (
+      {visiblePage === "exampleExperiment" && (
         <>
           <p
             style={{
               position: "absolute",
-              left: "50%",
-              top: "20px",
-              transform: "translateX(-50%)",
               textAlign: "center",
-              width: "80%"
             }}
           >
-            This is an example of what you will do in the experiment. 
+            This is an example of what you will do in the experiment.
           </p>
           <ExperimentPage
             logging={false}
-            itemOrder={[0, 0]}
+            itemOrder={[0, 0.5]}
             itemPhotography={[false, true]}
             nextPage={InstructionPageNavigation}
+            exitTo="InstructionsAgain"
           ></ExperimentPage>
         </>
       )}
 
-      {visiblePage === "distractor" && (
+      {visiblePage === "InstructionsAgain" && (
         <>
           <CenteringDiv>
             <h1>Instructions</h1>
             <p>
-              In this experiment you will be prompted to walk around an art
-              gallery and look at items. The phone will vibrate and a prompt
-              will appear on the screen when you should move to the next item.
-              At each item you will be asked to either observe it or take a
-              picture of it. At the end of the experiment you will be asked to
-              remember what you saw (the names of the items you saw?).
-            </p>
-            <p>You can opt out of the study at any point (ethics info here)</p>
-            <p>
-              When you are ready, click the button below to start an example
-              item
+              If you wish to see the example again, click the button below 
             </p>
             <button
               onClick={() => InstructionPageNavigation("exampleExperimenet")}
             >
-              Start Example
+              See Example Again
             </button>
             <p>
               When you are ready, click the button below to start the experiment

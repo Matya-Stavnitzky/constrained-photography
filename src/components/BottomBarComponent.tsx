@@ -129,6 +129,7 @@ const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
       if (logging) {
         savePhoto(photo, takenPhotos.current.length, imagesRefName); //save photo to firebase
       }
+      
     });
 
   const handleSwitchCamera =

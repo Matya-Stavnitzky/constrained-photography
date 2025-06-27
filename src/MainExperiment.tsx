@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import InstructionPage from "./experimentPages/InstructionPage";
-import CenteringDiv, { ScrollingCenteringDive } from "./components/CenteringDiv";
+import CenteringDiv, {
+  ScrollingCenteringDive,
+} from "./components/CenteringDiv";
 import { db } from "./config/firebase";
 import {
   addDoc,
@@ -186,134 +188,136 @@ const Experiment = () => {
   }, [ItemVeiwingIdx]);
 
   return (
-    // <FullscreenButton>
-    <>
-      {visiblePage === "SetUpPage" && (
-        <>
-          <CenteringDiv>
-            <h1>Experiment Setup</h1>
+    <FullscreenButton>
+      <>
+        {visiblePage === "SetUpPage" && (
+          <>
+            <CenteringDiv>
+              <h1>Experiment Setup</h1>
 
-            <div>
-              <label htmlFor="session">Session Id: </label>
-              <input type="text" id="session" name="session"></input>
-            </div>
+              <div>
+                <label htmlFor="session">Session Id: </label>
+                <input type="text" id="session" name="session"></input>
+              </div>
 
-            <div>
-              <label htmlFor="participant">Participant Number: </label>
-              <input type="text" id="participant" name="session"></input>
-            </div>
+              <div>
+                <label htmlFor="participant">Participant Number: </label>
+                <input type="text" id="participant" name="session"></input>
+              </div>
 
-            <div>
-              <label htmlFor="logging"> Log Photos</label>
-              <input type="checkbox" id="logging" name="logging"></input>
-            </div>
+              <div>
+                <label htmlFor="logging"> Log Photos</label>
+                <input type="checkbox" id="logging" name="logging"></input>
+              </div>
 
-            <button
-              onClick={async () => {
-                sessionId.current = (
-                  document.getElementById("session") as HTMLInputElement
-                ).value;
-                userId.current = (
-                  document.getElementById("participant") as HTMLInputElement
-                ).value;
-                logging.current = (
-                  document.getElementById("logging") as HTMLInputElement
-                ).checked;
+              <button
+                onClick={async () => {
+                  sessionId.current = (
+                    document.getElementById("session") as HTMLInputElement
+                  ).value;
+                  userId.current = (
+                    document.getElementById("participant") as HTMLInputElement
+                  ).value;
+                  logging.current = (
+                    document.getElementById("logging") as HTMLInputElement
+                  ).checked;
 
-                const { numbers, bools, stage, expIdx } = await generateOrder(
-                  sessionId.current,
-                  userId.current,
-                  logging.current,
-                  maxItems
-                );
-                itemOrder.current = numbers;
-                itemPhotography.current = bools;
-                setVeiwingIdx(expIdx);
-                console.log("Page retreived from db:", stage);
-                setVisiblePage(stage);
-              }}
-            >
-              Start Experiment
-            </button>
-          </CenteringDiv>
-        </>
-      )}
+                  const { numbers, bools, stage, expIdx } = await generateOrder(
+                    sessionId.current,
+                    userId.current,
+                    logging.current,
+                    maxItems
+                  );
+                  itemOrder.current = numbers;
+                  itemPhotography.current = bools;
+                  setVeiwingIdx(expIdx);
+                  console.log("Page retreived from db:", stage);
+                  setVisiblePage(stage);
+                }}
+              >
+                Start Experiment
+              </button>
+            </CenteringDiv>
+          </>
+        )}
 
-      {visiblePage === "InstructionPage" && (
-        <InstructionPage setVisiblePage={setVisiblePage}></InstructionPage>
-      )}
+        {visiblePage === "InstructionPage" && (
+          <InstructionPage setVisiblePage={setVisiblePage}></InstructionPage>
+        )}
 
-      {visiblePage === "ExperimentPage" && (
-        <>
-          <ExperimentPage
-            logging={logging.current}
-            itemOrder={itemOrder.current}
-            itemPhotography={itemPhotography.current}
-            nextPage={setVisiblePage}
-            participantId={userId.current}
+        {visiblePage === "ExperimentPage" && (
+          <>
+            <ExperimentPage
+              logging={logging.current}
+              itemOrder={itemOrder.current}
+              itemPhotography={itemPhotography.current}
+              nextPage={setVisiblePage}
+              participantId={userId.current}
+              sessionId={sessionId.current}
+              setVeiwingIdx={setVeiwingIdx}
+              itemVeiwingIdx={ItemVeiwingIdx}
+            ></ExperimentPage>
+          </>
+        )}
+
+        {visiblePage === "distractor" && (
+          <>
+            <DistractorPage setVisiblePage={setVisiblePage}></DistractorPage>
+          </>
+        )}
+
+        {visiblePage === "recall" && (
+          <RecallPage
+            setVisiblePage={setVisiblePage}
             sessionId={sessionId.current}
-            setVeiwingIdx={setVeiwingIdx}
-            itemVeiwingIdx={ItemVeiwingIdx}
-          ></ExperimentPage>
-        </>
-      )}
+            participantId={userId.current}
+          ></RecallPage>
+        )}
 
-      {visiblePage === "distractor" && (
-        <>
-          <DistractorPage setVisiblePage={setVisiblePage}></DistractorPage>
-        </>
-      )}
-
-      {visiblePage === "recall" && (
-        <RecallPage
-          setVisiblePage={setVisiblePage}
-          sessionId={sessionId.current}
-          participantId={userId.current}
-        ></RecallPage>
-      )}
-
-      {visiblePage === "end" && (
-        <ScrollingCenteringDive>
-          <h1>Experiment Complete</h1>
-          <p>
-            Thank you for participating in our study. This experiment examines
-            how taking photos in different ways impacts different cognitive
-            aspects.{" "}
-          </p>
-          <p>
-            This study has been reviewed and received ethics clearance through a
-            University of Waterloo Research Ethics Board (REB# 47599). If you
-            have questions for the Board, contact the Office of Research Ethics,
-            toll-free at 1-833-643-2379 (Canada and USA), 1- 519-888-4440, or
-            reb@uwaterloo.ca. For all other questions contact a member of the
-            research team listed below.
-          </p>
-
-          <p>Please remember that the data set
-            without identifiers may be shared publicly. Your identity will be
-            confidential. Once all the data are collected and analyzed for this
-            project, we plan on sharing this information with the research
-            community through seminars, conferences, presentations, and journal
-            articles. If you are interested in receiving more information
-            regarding the results of this study, or would like a summary of the
-            results, please contact the researchers, and when the study is
-            completed, we will send you the information. In the meantime, if you
-            have any questions about the study, please do not hesitate to
-            contact a member of the research team listed below. 
+        {visiblePage === "end" && (
+          <ScrollingCenteringDive>
+            <h1>Experiment Complete</h1>
+            <p>
+              Thank you for participating in our study. This experiment examines
+              how taking photos in different ways impacts different cognitive
+              aspects.{" "}
+            </p>
+            <p>
+              This study has been reviewed and received ethics clearance through
+              a University of Waterloo Research Ethics Board (REB# 47599). If
+              you have questions for the Board, contact the Office of Research
+              Ethics, toll-free at 1-833-643-2379 (Canada and USA), 1-
+              519-888-4440, or reb@uwaterloo.ca. For all other questions contact
+              a member of the research team listed below.
             </p>
 
             <p>
-            Sincerely, <br></br>
-            Nikhita Joshi, PhD Student, nvjoshi@uwaterloo.ca <br></br>
-            Matya Stavnitzky, Undergraduate Research Fellow, mstavnit@uwaterloo.ca <br></br>
-            Dr. Daniel Vogel, Professor, 519-888-4567 ext. 33561, dvogel@uwaterloo.ca
-            School of Computer Science, University of Waterloo
+              Please remember that the data set without identifiers may be
+              shared publicly. Your identity will be confidential. Once all the
+              data are collected and analyzed for this project, we plan on
+              sharing this information with the research community through
+              seminars, conferences, presentations, and journal articles. If you
+              are interested in receiving more information regarding the results
+              of this study, or would like a summary of the results, please
+              contact the researchers, and when the study is completed, we will
+              send you the information. In the meantime, if you have any
+              questions about the study, please do not hesitate to contact a
+              member of the research team listed below.
             </p>
-            
-        </ScrollingCenteringDive>
-      )}
-    </>
-    // </FullscreenButton>
+
+            <p>
+              Sincerely, <br></br>
+              Nikhita Joshi, PhD Student, nvjoshi@uwaterloo.ca <br></br>
+              Matya Stavnitzky, Undergraduate Research Fellow,
+              mstavnit@uwaterloo.ca <br></br>
+              Dr. Daniel Vogel, Professor, 519-888-4567 ext. 33561,
+              dvogel@uwaterloo.ca School of Computer Science, University of
+              Waterloo
+            </p>
+          </ScrollingCenteringDive>
+        )}
+      </>
+    </FullscreenButton>
   );
 };
 export default Experiment;

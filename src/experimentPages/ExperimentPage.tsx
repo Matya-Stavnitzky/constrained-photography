@@ -13,6 +13,8 @@ function continueExperiment(
   exitTo: string
 ) {
   {
+    //TODO: CHECK IF THE VIBRATION WORKS ON A PHONE
+    window.navigator.vibrate([500]);
     setIdx(idx + 1);
 
     if (idx + 1 >= itemOrder.length) {
@@ -31,8 +33,8 @@ type ExperimentPageProps = {
   nextPage: React.Dispatch<React.SetStateAction<string>>; // Function to navigate to the next page of the experiment
 
   // Optional props
-  setVeiwingIdx?: React.Dispatch<React.SetStateAction<number>>; //local control of which item is being viewed, to allow for reloading the page 
-  itemVeiwingIdx?: number;  //item being veiwed
+  setVeiwingIdx?: React.Dispatch<React.SetStateAction<number>>; //local control of which item is being viewed, to allow for reloading the page
+  itemVeiwingIdx?: number; //item being veiwed
   participantId?: string;
   sessionId?: string;
   exitTo?: string; // Optional prop to specify where to exit
@@ -111,7 +113,7 @@ const ExperimentPage: React.FC<ExperimentPageProps> = ({
                   currentIdx,
                   itemOrder,
                   setPage,
-                  nextPage, 
+                  nextPage,
                   exitTo
                 );
               }}

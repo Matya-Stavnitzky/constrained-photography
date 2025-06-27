@@ -74,14 +74,14 @@ const InstructionPage: React.FC<CenteredPageProps> = ({ setVisiblePage }) => {
         <>
           <CenteringDiv>
             <h1>Instructions</h1>
-            <p>
+            {/* <p>
               If you wish to see the example again, click the button below 
             </p>
             <button
               onClick={() => InstructionPageNavigation("exampleExperimenet")}
             >
               See Example Again
-            </button>
+            </button> */}
             <p>
               When you are ready, click the button below to start the experiment
             </p>

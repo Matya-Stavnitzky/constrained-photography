@@ -149,7 +149,7 @@ const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
                 ? takenPhotos.current[takenPhotos.current.length - 1]
                 : typeof image === "string"
                 ? image
-                : "/solid-color-image.jpeg"
+                : "public/solid-color-image.jpeg"
             }
             alt="Taken photo"
             onClick={() => {

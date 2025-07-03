@@ -8,6 +8,12 @@ import styled from "styled-components";
 // import { useNavigate } from "react-router-dom";
 import { type CameraType } from "react-camera-pro";
 import TakePhotoButton from "./buttons/TakePhotoButton";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadString,
+} from "firebase/storage";
 
 const BottomBar = styled.div`
   position: absolute;
@@ -53,6 +59,10 @@ type BottomBarComponentProps = {
   thumbNailFunction?: () => void;
   takePhotoFunction?: () => void;
   changeCameraFunction?: () => void;
+  participantId?: string;
+  sessionId?: string;
+  logging: boolean;
+  itemId?: string;
 };
 
 const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
@@ -62,11 +72,43 @@ const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
   thumbNailFunction,
   takePhotoFunction,
   changeCameraFunction,
+  participantId,
+  sessionId,
+  logging,
+  itemId,
 }) => {
   const [image, setImage] = useState<string | ImageData | undefined | null>(
     null
   ); //image to be displayed in the thumbnail
   const camera = passedCamera; //access to the camera so photos can be saved
+
+  //STORING IMAGEs IN FIREBASE
+  // Get a reference to the storage service, which is used to create references in your storage bucket
+  const storage = getStorage();
+  const storageRef = ref(storage);
+  // Create a storage reference from our storage service
+  const imagesRefName = `S${sessionId}P${participantId}/I${itemId}`;
+
+  const savePhoto = (
+    photo: string,
+    photonum: number,
+    imagesRefName: string
+  ) => {
+    // Create a reference to 'images/photo.jpg'
+    const photoRef = ref(storageRef, `${imagesRefName}-${photonum}.jpg`);
+
+    console.log("photo is:", photo);
+    uploadString(photoRef, photo, "data_url").then(() => {
+      console.log("Uploaded a photo (format data_url)!");
+    });
+
+    const storage = getStorage();
+    getDownloadURL(ref(storage, photoRef.fullPath)).then((url) => {
+      // `url` is the download URL for 'images/stars.jpg'
+      // This can be used to display the image in an <img> tag or as a CSS background
+      console.log("Download URL:", url);
+    });
+  };
 
   // Provide a default if thumbNailFunction is not passed
   const handleThumbNailClick =
@@ -83,11 +125,18 @@ const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
       const photo = camera.current?.takePhoto() as string; //get photo from camera
       takenPhotos.current.push(photo); //add to array
       setImage(photo); //set photo thumbnail to the last photo taken
+
+      if (logging) {
+        savePhoto(photo, takenPhotos.current.length, imagesRefName); //save photo to firebase
+      }
+      
     });
 
-  const handleSwitchCamera = changeCameraFunction ?? (() => {
+  const handleSwitchCamera =
+    changeCameraFunction ??
+    (() => {
       camera.current?.switchCamera();
-  })
+    });
 
   return (
     <>

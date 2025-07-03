@@ -1,28 +1,30 @@
-import { useEffect, useRef, useState, type Dispatch, type SetStateAction } from "react";
+import { useRef, useState, type Dispatch, type SetStateAction } from "react";
 import CenteringDiv from "../components/CenteringDiv";
-import sleep from "../components/sleep";
+import MyTimer from "../components/timer";
 
 const MathQuestion = () => {
   const [num1, setNum1] = useState<number>(Math.floor(Math.random() * 13));
   const [num2, setNum2] = useState<number>(Math.floor(Math.random() * 13));
   const answerRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (Number(answerRef.current!.value) === num1 * num2) {
+      setNum1(Math.floor(Math.random() * 13));
+      setNum2(Math.floor(Math.random() * 13));
+      answerRef.current!.value = "";
+    }
+  };
+
   return (
     <>
-      <p>
-        What is {num1} x {num2}?
-      </p>
-      <input type="number" ref={answerRef}/>
-      <button
-        onClick={() => {
-        if(answerRef.current!.value !== "") {
-          setNum1(Math.floor(Math.random() * 13));
-          setNum2(Math.floor(Math.random() * 13));
-            answerRef.current!.value = "";
-        }
-        }}
-      >
-        Submit
-      </button>
+      <form onSubmit={handleSubmit}>
+        <p>
+          What is {num1} x {num2}?
+        </p>
+        <input type="number" inputMode="numeric" ref={answerRef} />
+        <button type="submit">Submit</button>
+      </form>
     </>
   );
 };
@@ -33,15 +35,7 @@ type DistractorPageProps = {
 
 const DistractorPage: React.FC<DistractorPageProps> = ({ setVisiblePage }) => {
   const [distractorNav, setDistractorNav] = useState<string>("EndVeiwing");
-
-//   the amount of time to do this task
-  useEffect(() => {
-    if (distractorNav === "distractorTask") {
-      sleep(10).then(() => {
-        setVisiblePage("recall");
-      });
-    }
-  }, [distractorNav, setVisiblePage]);
+  const distractorTime = 60; // one minute
 
   return (
     <>
@@ -62,6 +56,10 @@ const DistractorPage: React.FC<DistractorPageProps> = ({ setVisiblePage }) => {
       {distractorNav === "distractorTask" && (
         <CenteringDiv>
           <h1>Please answer as many questions as you can</h1>
+          <MyTimer
+            timeS={distractorTime}
+            onExpire={() => setVisiblePage("recall")}
+          ></MyTimer>
           <MathQuestion></MathQuestion>
         </CenteringDiv>
       )}

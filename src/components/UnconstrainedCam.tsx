@@ -5,12 +5,20 @@ import ImageDisplayPage from "./ImageDisplayPage";
 
 type UnconstrainedCamProps = {
   showImagePage?: boolean;
-  displayImagePageSetter?: Dispatch<SetStateAction<boolean>>; 
+  displayImagePageSetter?: Dispatch<SetStateAction<boolean>>;
+  participantId?: string;
+  sessionId?: string;
+  logging: boolean;
+  itemId?: string;
 };
 
 const UnconstrainedCam: React.FC<UnconstrainedCamProps> = ({
   showImagePage,
   displayImagePageSetter,
+  logging = false,
+  participantId,
+  sessionId,
+  itemId,
 }) => {
   const camera = useRef<CameraType>(null); //The camera
   const [showImages, setShowImages] = useState(false); //boolean should the Image display page or this page be shown
@@ -20,7 +28,8 @@ const UnconstrainedCam: React.FC<UnconstrainedCamProps> = ({
   // Use showImages as default for showImagePage
   const effectiveShowImagePage = showImagePage ?? showImages;
   // Use setShowImages as default for displayImagePageSetter
-  const effectiveDisplayImagePageSetter = displayImagePageSetter ?? setShowImages;
+  const effectiveDisplayImagePageSetter =
+    displayImagePageSetter ?? setShowImages;
 
   //Lock the screen orientation to portrait (only works for mobile on some browsers)
   if ("orientation" in screen && "lock" in screen.orientation) {
@@ -46,6 +55,10 @@ const UnconstrainedCam: React.FC<UnconstrainedCamProps> = ({
             passedCamera={camera}
             setShowImages={effectiveDisplayImagePageSetter}
             takenPhotos={takenPhotos}
+            logging={logging}
+            participantId={participantId}
+            sessionId={sessionId}
+            itemId={itemId}
           />
         </>
       )}

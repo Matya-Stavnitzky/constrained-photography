@@ -21,7 +21,7 @@ const BottomBar = styled.div`
   left: 0;
   right: 0;
   height: 15%;
-  background-color: rgba(47, 59, 45, 0.56);
+  background-color: hsla(0, 0.00%, 0.00%);
   display: flex;
   direction: row;
   justify-content: space-around;

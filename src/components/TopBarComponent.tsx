@@ -6,7 +6,7 @@ const TopBarComponent = styled.div`
   left: 0;
   right: 0;
   height: 15%;
-  background-color: rgba(47, 59, 45, 0.56);
+  background-color: rgba(0, 0, 0);
   display: flex;
   align-items: center;
   justify-content: center;

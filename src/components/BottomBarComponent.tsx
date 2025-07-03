@@ -87,7 +87,7 @@ const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
   const storage = getStorage();
   const storageRef = ref(storage);
   // Create a storage reference from our storage service
-  const imagesRefName = `s-${sessionId}-p-${participantId}/i-${itemId}`;
+  const imagesRefName = `S${sessionId}P${participantId}/I${itemId}`;
 
   const savePhoto = (
     photo: string,

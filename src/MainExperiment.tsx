@@ -194,6 +194,7 @@ const Experiment = () => {
           <>
             <CenteringDiv>
               <h1>Experiment Setup</h1>
+              <p>The new updated version</p>
 
               <div>
                 <label htmlFor="session">Session Id: </label>

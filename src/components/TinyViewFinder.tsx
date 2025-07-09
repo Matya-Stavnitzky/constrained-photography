@@ -67,6 +67,7 @@ const TinyViewFinder = () => {
                 regCamera.current?.switchCamera();
                 miniCamera.current?.switchCamera();
               }}
+              logging={false}
             ></BottomBarComponent>
           </>
         )}

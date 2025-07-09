@@ -46,7 +46,7 @@ const PhotoDiary = () => {
               passedCamera={camera}
               setShowImages={setShowImages}
               takenPhotos={takenPhotos}
-
+              logging={false}
             >
               {/* TODO: add a function with special take photo responsibility */}
             </BottomBarComponent>

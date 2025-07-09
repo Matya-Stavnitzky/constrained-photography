@@ -53,6 +53,7 @@ const ZoomedViewFinder = () => {
             </CameraContainer>
 
             <BottomBarComponent
+              logging={false}
               passedCamera={regCamera}
               setShowImages={setShowImages}
               takenPhotos={takenPhotos}

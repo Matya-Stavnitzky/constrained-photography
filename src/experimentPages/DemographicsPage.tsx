@@ -149,7 +149,7 @@ const DemographicsPage: React.FC<DemographicsPageProps> = ({
                 type="text"
                 name="gender-other"
                 placeholder="Please specify"
-                style={{ marginLeft: "8px" }}
+                style={{ marginLeft: "5px" }}
                 disabled={gender !== "other"}
                 value={gender === "other" ? otherGender : ""}
                 onChange={(e) => setOtherGender(e.target.value)}
@@ -163,7 +163,7 @@ const DemographicsPage: React.FC<DemographicsPageProps> = ({
           <div>
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="photo-frequency"
                 checked={photoFrequency === "daily"}
                 onChange={() => setPhotoFrequency("daily")}
@@ -174,7 +174,7 @@ const DemographicsPage: React.FC<DemographicsPageProps> = ({
           <div>
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="photo-frequency"
                 checked={photoFrequency === "weekly"}
                 onChange={() => setPhotoFrequency("weekly")}
@@ -185,7 +185,7 @@ const DemographicsPage: React.FC<DemographicsPageProps> = ({
           <div>
             <label>
               <input
-                type="checkbox"
+                type="radio"
                 name="photo-frequency"
                 checked={photoFrequency === "monthly"}
                 onChange={() => setPhotoFrequency("monthly")}
@@ -194,9 +194,9 @@ const DemographicsPage: React.FC<DemographicsPageProps> = ({
             </label>
           </div>
           <div>
-            <label>
+            <label style={{ display: "flex", alignItems: "center" }}>
               <input
-                type="checkbox"
+                type="radio"
                 name="photo-frequency"
                 checked={photoFrequency === "other"}
                 onChange={() => setPhotoFrequency("other")}
@@ -206,9 +206,19 @@ const DemographicsPage: React.FC<DemographicsPageProps> = ({
                 type="text"
                 name="photo-frequency-other"
                 placeholder="Please specify"
-                style={{ marginLeft: "8px" }}
+                style={{
+                  marginLeft: "5px",
+                  flex: 1,
+                  transition: "scroll 0.3s",
+                }}
                 disabled={photoFrequency !== "other"}
                 value={photoFrequency === "other" ? otherPhotoFrequency : ""}
+                onFocus={(e) => {
+                  // Scroll the input into view when focused (especially on mobile)
+                  setTimeout(() => {
+                    e.target.scrollIntoView({ behavior: "smooth", block: "center" });
+                  }, 300); // Delay to allow keyboard to open
+                }}
                 onChange={(e) => setOtherPhotoFrequency(e.target.value)}
               />
             </label>

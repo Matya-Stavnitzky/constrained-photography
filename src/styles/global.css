@@ -22,8 +22,9 @@ h1 {
 p {
   font-size: 1em;
   margin: 0;
-  margin-left: 5vw;
-  margin-right: 5vw;
+  margin-left: 7vw;
+  margin-right: 7vw;
+  width: 90%;
 }
 
 button {
@@ -40,7 +41,7 @@ button {
 }
 
 :not(:root):fullscreen::backdrop {
-    position: fixed;
-    inset: 0px;
-    background: rgb(255, 255, 255)
+  position: fixed;
+  inset: 0px;
+  background: rgb(255, 255, 255);
 }

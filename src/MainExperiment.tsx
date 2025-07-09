@@ -150,11 +150,11 @@ const Experiment = () => {
 
   const divStyle: React.CSSProperties = {
     marginTop: "3vh",
-    marginLeft: "5vw",
+    marginLeft: "20vw",
     marginRight: "5vw",
     display: "flex",
     alignItems: "flex-start",
-    width: "80%",
+    width: "100%",
     gap: "10px",
   };
 
@@ -202,7 +202,6 @@ const Experiment = () => {
           <>
             <CenteringDiv>
               <h1>Experiment Setup</h1>
-              <p>The new updated version</p>
 
             <div style={divStyle}>
               <label htmlFor="session">Session Id: </label>

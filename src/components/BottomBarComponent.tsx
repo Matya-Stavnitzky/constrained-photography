@@ -149,9 +149,12 @@ const BottomBarComponent: React.FC<BottomBarComponentProps> = ({
                 ? takenPhotos.current[takenPhotos.current.length - 1]
                 : typeof image === "string"
                 ? image
-                : "public/solid-color-image.jpeg"
+                : "/solid-color-image.jpeg"
             }
-            alt="Taken photo"
+            alt=""
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = "/solid-color-image.jpeg";
+            }}
             onClick={() => {
               handleThumbNailClick();
             }}

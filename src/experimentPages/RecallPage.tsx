@@ -42,11 +42,15 @@ const RecallPage: React.FC<RecallPageProps> = ({
           cannot remember the name of an item you can describe the item.
         </p>
         <textarea
-          style={{outlineColor: "black"}}
+          style={{
+            outlineColor: "black",
+            width: "90%",
+            boxSizing: "border-box",
+            resize: "vertical"
+          }}
           rows={15}
-          cols={50}
           placeholder="Type your answers here..."
-          id = "recallText"
+          id="recallText"
         ></textarea>
       </CenteringDiv>
     </>

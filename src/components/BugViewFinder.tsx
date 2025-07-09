@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { Camera, type CameraType } from "react-camera-pro";
 
 import styled from "styled-components";
-import BottomBarComponent from "./BottomBarComponent";
+// import BottomBarComponent from "./BottomBarComponent";
 import FullscreenButton from "./buttons/FullScreenButton";
 import ImageDisplayPage from "./ImageDisplayPage";
 
@@ -67,12 +67,13 @@ const BugViewFinder = () => {
 
             <Camera ref={camera} />
 
-            <BottomBarComponent
+            {/* <BottomBarComponent
               passedCamera={camera}
               setShowImages={setShowImage}
               takenPhotos={takenPhotos}
+              logging = {false}
               // NOTE to flip camera need a special method here that flips ALL the camera
-            ></BottomBarComponent>
+            ></BottomBarComponent> */}
           </>
         )}
       </FullscreenButton>

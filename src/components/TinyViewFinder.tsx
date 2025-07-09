@@ -63,6 +63,7 @@ const TinyViewFinder = () => {
               passedCamera={regCamera}
               setShowImages={setShowImages}
               takenPhotos={takenPhotos}
+              logging={false} //TODO: set to true when logging is implemented
               changeCameraFunction={() => {
                 regCamera.current?.switchCamera();
                 miniCamera.current?.switchCamera();

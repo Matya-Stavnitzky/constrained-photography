@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";  
-import UnconstrainedCamFullScreen from "./components/UnconstrainedCameraFullScreen";
 import ZoomedViewFinder from "./components/ZoomedViewFinder";
 import PhotoDiary from "./components/PhotoDiary";
 // import DiaryDisplayPage from "./components/DiaryDisplayPage";
@@ -19,7 +18,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <Routes>
         {/* <Route path="/" element={<SelectionPage/>} /> */}
         <Route path="/" element={<Experiment/>} />
-        <Route path="/UnconstrainedCam" element={<UnconstrainedCamFullScreen />} />
         <Route path="/ZoomedViewFinder" element={<ZoomedViewFinder />} />
         <Route path="/PhotoDiary" element={<PhotoDiary />} />
         {/* <Route path="/DiaryDisplayPage" element={<DiaryDisplayPage />} /> */}

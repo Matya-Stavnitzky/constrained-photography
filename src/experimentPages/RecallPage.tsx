@@ -36,7 +36,7 @@ const RecallPage: React.FC<RecallPageProps> = ({
     <>
       <CenteringDiv>
         <h1>Recall Task</h1>
-        <MyTimer timeS={10} onExpire={() => handleExpire()} />
+        <MyTimer timeS={30} onExpire={() => handleExpire()} />
         <p>
           Please write the names of as many items as you can remember. If you
           cannot remember the name of an item you can describe the item.

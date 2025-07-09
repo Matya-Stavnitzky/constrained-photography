@@ -27,17 +27,6 @@ const InstructionPage: React.FC<CenteredPageProps> = ({ setVisiblePage }) => {
               remember the names of the items you saw.
             </p>
             <p>
-              You may decide to withdraw during the session by informing the
-              facilitator or principal investigator and/or exiting the session
-              software.
-            </p>
-            <p>
-              If you wish to withdraw your data after completing a session,
-              please contact the facilitator or principal investigator. Note it
-              may not be possible to withdraw your data if your data has been
-              anonymized or already included in analysis.
-            </p>
-            <p>
               When you are ready, click the button below to start an example
               item
             </p>
@@ -74,14 +63,6 @@ const InstructionPage: React.FC<CenteredPageProps> = ({ setVisiblePage }) => {
         <>
           <CenteringDiv>
             <h1>Instructions</h1>
-            {/* <p>
-              If you wish to see the example again, click the button below 
-            </p>
-            <button
-              onClick={() => InstructionPageNavigation("exampleExperimenet")}
-            >
-              See Example Again
-            </button> */}
             <p>
               When you are ready, click the button below to start the experiment
             </p>

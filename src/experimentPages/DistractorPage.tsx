@@ -17,15 +17,17 @@ const MathQuestion = () => {
   };
 
   return (
-    <>
+    <div>
       <form onSubmit={handleSubmit}>
         <p>
           What is {num1} x {num2}?
         </p>
-        <input type="number" inputMode="numeric" ref={answerRef} />
-        <button type="submit">Submit</button>
+        <div style={{ display: "flex", gap: "1vw" }}>
+          <input type="number" inputMode="numeric" ref={answerRef} />
+          <button type="submit">Submit</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 
@@ -59,6 +61,7 @@ const DistractorPage: React.FC<DistractorPageProps> = ({ setVisiblePage }) => {
           <MyTimer
             timeS={distractorTime}
             onExpire={() => setVisiblePage("recall")}
+            // onExpire={() => console.log("Timer expired")}
           ></MyTimer>
           <MathQuestion></MathQuestion>
         </CenteringDiv>

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Camera, type CameraType } from "react-camera-pro";
 import styled from "styled-components";
-import UnconstrainedCam from "./UnconstrainedCam";
+// import UnconstrainedCam from "./UnconstrainedCam";
 
 const CameraContainer = styled.div`
   position: absolute;
@@ -26,7 +26,7 @@ const TestPage = () => {
         <Camera ref={zoomedCamera} aspectRatio={2 / 8} />
       </CameraContainer>
 
-      <UnconstrainedCam></UnconstrainedCam>
+      {/* <UnconstrainedCam></UnconstrainedCam> */}
     </>
   );
 };

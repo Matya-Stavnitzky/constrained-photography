@@ -61,7 +61,6 @@ const ZoomedViewFinder = () => {
                 regCamera.current?.switchCamera();
                 zoomedCamera.current?.switchCamera();
               }}
-              logging={false} //TODO: set to true when logging is implemented
             ></BottomBarComponent>
           </>
         )}

@@ -28,7 +28,7 @@ const BottomBar = styled.div`
   left: 0;
   right: 0;
   height: 15%;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

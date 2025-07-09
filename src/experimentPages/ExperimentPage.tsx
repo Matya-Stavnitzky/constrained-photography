@@ -14,7 +14,7 @@ function continueExperiment(
 ) {
   {
     //TODO: CHECK IF THE VIBRATION WORKS ON A PHONE
-    window.navigator.vibrate([500]);
+    navigator.vibrate(500);
     setIdx(idx + 1);
 
     if (idx + 1 >= itemOrder.length) {

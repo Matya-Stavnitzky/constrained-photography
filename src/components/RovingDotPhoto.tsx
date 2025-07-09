@@ -12,7 +12,7 @@ const RovingDotPhoto = () => {
         <UnconstrainedCam
           showImagePage={showImages}
           displayImagePageSetter={setShowImages}
-          logging={false}
+          logging = {false} // TODO: set to true when logging is implemented
         ></UnconstrainedCam>
         {!showImages && <RovingDot transparent={false} circleDim="40vh" />}
       </FullscreenButton>

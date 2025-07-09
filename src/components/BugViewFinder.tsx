@@ -71,6 +71,7 @@ const BugViewFinder = () => {
               passedCamera={camera}
               setShowImages={setShowImage}
               takenPhotos={takenPhotos}
+              logging = {false}
               // NOTE to flip camera need a special method here that flips ALL the camera
             ></BottomBarComponent> */}
           </>

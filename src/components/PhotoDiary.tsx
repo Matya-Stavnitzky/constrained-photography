@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Camera, type CameraType } from "react-camera-pro";
 // import styled from "styled-components";
-import BottomBarComponent from "./BottomBarComponent";
+// import BottomBarComponent from "./BottomBarComponent";
 import FullscreenButton from "./buttons/FullScreenButton";
 import DiaryDisplayPage from "./DiaryDisplayPage";
 
@@ -42,14 +42,14 @@ const PhotoDiary = () => {
 
             {photoTaken && (<img></img>)}
 
-            <BottomBarComponent
+            {/* <BottomBarComponent
               passedCamera={camera}
               setShowImages={setShowImages}
               takenPhotos={takenPhotos}
-              logging={false}
+              logging={false} //TODO: pass logging here
             >
               {/* TODO: add a function with special take photo responsibility */}
-            </BottomBarComponent>
+            {/* </BottomBarComponent> */}
           </>
         )}
       </FullscreenButton>

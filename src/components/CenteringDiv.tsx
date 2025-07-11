@@ -7,6 +7,7 @@ const CenteringDiv = styled.div`
   flex-direction: column;
   gap: 1.5vh;
   height: 100vh;
+  width: 100%;
 `;
 
 const ScrollingCenteringDive = styled.div`

@@ -17,6 +17,7 @@ import RecallPage from "./experimentPages/RecallPage";
 import FullscreenButton from "./components/buttons/FullScreenButton";
 import EndPage from "./experimentPages/EndPage";
 import DemographicsPage from "./experimentPages/DemographicsPage";
+import KeyboardAwareScrollContainer from "./components/KeyboardAwareScrollContainer";
 
 const getBools = (maxItems: number) => {
   //Make randomized array of booleans, where 1/2 are true
@@ -138,7 +139,7 @@ const generateOrder = async (
  */
 const Experiment = () => {
   const maxItems = 6; // Maximum number of items in the experiment
-  const [visiblePage, setVisiblePage] = React.useState("SetUpPage"); 
+  const [visiblePage, setVisiblePage] = React.useState("SetUpPage");
   const [ItemVeiwingIdx, setVeiwingIdx] = React.useState(0);
 
   const sessionId = useRef<string>("");
@@ -197,101 +198,104 @@ const Experiment = () => {
 
   return (
     <FullscreenButton>
-    <>
+      <>
         {visiblePage === "SetUpPage" && (
           <>
-            <CenteringDiv>
-              <h1>Experiment Setup</h1>
+            <KeyboardAwareScrollContainer>
+              <CenteringDiv>
+                <h1>Experiment Setup</h1>
 
-            <div style={divStyle}>
-              <label htmlFor="session">Session Id: </label>
-              <input type="text" id="session" name="session"></input>
-            </div>
+                <div style={divStyle}>
+                  <label htmlFor="session">Session Id: </label>
+                  <input type="text" id="session" name="session"></input>
+                </div>
 
-            <div style={divStyle}>
-              <label htmlFor="participant">Participant Number: </label>
-              <input type="text" id="participant" name="session"></input>
-            </div>
+                <div style={divStyle}>
+                  <label htmlFor="participant">Participant Number: </label>
+                  <input type="text" id="participant" name="session"></input>
+                </div>
 
-            <div style={divStyle}>
-              <label htmlFor="logging"> Log Photos</label>
-              <input type="checkbox" id="logging" name="logging"></input>
-            </div>
+                <div style={divStyle}>
+                  <label htmlFor="logging"> Log Photos</label>
+                  <input type="checkbox" id="logging" name="logging"></input>
+                </div>
 
-            <button
-              onClick={async () => {
-                sessionId.current = (
-                  document.getElementById("session") as HTMLInputElement
-                ).value;
-                userId.current = (
-                  document.getElementById("participant") as HTMLInputElement
-                ).value;
-                logging.current = (
-                  document.getElementById("logging") as HTMLInputElement
-                ).checked;
+                <button
+                  onClick={async () => {
+                    sessionId.current = (
+                      document.getElementById("session") as HTMLInputElement
+                    ).value;
+                    userId.current = (
+                      document.getElementById("participant") as HTMLInputElement
+                    ).value;
+                    logging.current = (
+                      document.getElementById("logging") as HTMLInputElement
+                    ).checked;
 
-                const { numbers, bools, stage, expIdx } = await generateOrder(
-                  sessionId.current,
-                  userId.current,
-                  logging.current,
-                  maxItems
-                );
+                    const { numbers, bools, stage, expIdx } =
+                      await generateOrder(
+                        sessionId.current,
+                        userId.current,
+                        logging.current,
+                        maxItems
+                      );
 
-                itemOrder.current = numbers;
-                itemPhotography.current = bools;
-                setVeiwingIdx(expIdx);
-                console.log("Page retreived from db:", stage);
-                setVisiblePage(stage);
-              }}
-            >
-              Start Experiment
-            </button>
-          </CenteringDiv>
-        </>
-      )}
+                    itemOrder.current = numbers;
+                    itemPhotography.current = bools;
+                    setVeiwingIdx(expIdx);
+                    console.log("Page retreived from db:", stage);
+                    setVisiblePage(stage);
+                  }}
+                >
+                  Start Experiment
+                </button>
+              </CenteringDiv>
+            </KeyboardAwareScrollContainer>
+          </>
+        )}
 
-      {visiblePage === "DemographicsPage" && (
-        <DemographicsPage
-          setVisiblePage={setVisiblePage}
-          docRef={getDocRef()}
-        ></DemographicsPage>
-      )}
+        {visiblePage === "DemographicsPage" && (
+          <DemographicsPage
+            setVisiblePage={setVisiblePage}
+            docRef={getDocRef()}
+          ></DemographicsPage>
+        )}
 
-      {visiblePage === "InstructionPage" && (
-        <InstructionPage setVisiblePage={setVisiblePage}></InstructionPage>
-      )}
+        {visiblePage === "InstructionPage" && (
+          <InstructionPage setVisiblePage={setVisiblePage}></InstructionPage>
+        )}
 
-      {visiblePage === "ExperimentPage" && (
-        <>
-          <ExperimentPage
-            logging={logging.current}
-            itemOrder={itemOrder.current}
-            itemPhotography={itemPhotography.current}
-            nextPage={setVisiblePage}
-            participantId={userId.current}
+        {visiblePage === "ExperimentPage" && (
+          <>
+            <ExperimentPage
+              logging={logging.current}
+              itemOrder={itemOrder.current}
+              itemPhotography={itemPhotography.current}
+              nextPage={setVisiblePage}
+              participantId={userId.current}
+              sessionId={sessionId.current}
+              setVeiwingIdx={setVeiwingIdx}
+              itemVeiwingIdx={ItemVeiwingIdx}
+            ></ExperimentPage>
+          </>
+        )}
+
+        {visiblePage === "distractor" && (
+          <>
+            <DistractorPage setVisiblePage={setVisiblePage}></DistractorPage>
+          </>
+        )}
+
+        {visiblePage === "recall" && (
+          <RecallPage
+            setVisiblePage={setVisiblePage}
             sessionId={sessionId.current}
-            setVeiwingIdx={setVeiwingIdx}
-            itemVeiwingIdx={ItemVeiwingIdx}
-          ></ExperimentPage>
-        </>
-      )}
+            participantId={userId.current}
+          ></RecallPage>
+        )}
 
-      {visiblePage === "distractor" && (
-        <>
-          <DistractorPage setVisiblePage={setVisiblePage}></DistractorPage>
-        </>
-      )}
-
-      {visiblePage === "recall" && (
-        <RecallPage
-          setVisiblePage={setVisiblePage}
-          sessionId={sessionId.current}
-          participantId={userId.current}
-        ></RecallPage>
-      )}
-
-      {visiblePage === "end" && <EndPage></EndPage>}
-    </>
+        {visiblePage === "end" && <EndPage></EndPage>}
+      </>
     </FullscreenButton>
   );
 };

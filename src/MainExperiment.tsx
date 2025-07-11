@@ -138,7 +138,7 @@ const generateOrder = async (
  * @returns
  */
 const Experiment = () => {
-  const maxItems = 6; // Maximum number of items in the experiment
+  const maxItems = 30; // Maximum number of items in the experiment
   const [visiblePage, setVisiblePage] = React.useState("SetUpPage");
   const [ItemVeiwingIdx, setVeiwingIdx] = React.useState(0);
 

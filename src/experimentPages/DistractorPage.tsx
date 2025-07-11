@@ -31,13 +31,16 @@ const MathQuestion = () => {
   );
 };
 
+/**
+ * DistractorPage component for the distractor task in the experiment.
+ */
 type DistractorPageProps = {
   setVisiblePage: Dispatch<SetStateAction<string>>;
 };
 
 const DistractorPage: React.FC<DistractorPageProps> = ({ setVisiblePage }) => {
   const [distractorNav, setDistractorNav] = useState<string>("EndVeiwing");
-  const distractorTime = 60; // one minute
+  const distractorTime = 60 * 3; // 3 minutes
 
   return (
     <>

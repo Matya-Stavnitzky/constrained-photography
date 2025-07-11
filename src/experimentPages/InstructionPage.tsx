@@ -19,16 +19,22 @@ const InstructionPage: React.FC<CenteredPageProps> = ({ setVisiblePage }) => {
           <CenteringDiv>
             <h1>Instructions</h1>
             <p>
-              In this experiment you will be prompted to walk around an art
-              gallery and look at items. The phone will vibrate and a prompt
-              will appear on the screen when you should move to the next item.
-              At each item you will be asked to either observe it or take a
-              picture. At the end of the experiment you will be asked to
-              remember the names of the items you saw.
+              In this experiment, you will walk through an art gallery and view
+              various items. Your phone will vibrate and display a prompt when
+              it is time to move to the next item.
             </p>
             <p>
-              When you are ready, click the button below to start an example
-              item
+              At each item, you will be instructed to either observe it
+              carefully or take a photo. If you're prompted to take a photo, the
+              camera will open automatically. You may take as many photos as
+              you'd like, but you must take at least one.
+            </p>
+            <p>
+              At the end of the gallery walkthrough, you will complete a memory
+              test based on the items you encountered.
+            </p>
+            <p>
+              When you are ready, click the button below to start an example.
             </p>
             <button
               onClick={() => InstructionPageNavigation("exampleExperiment")}

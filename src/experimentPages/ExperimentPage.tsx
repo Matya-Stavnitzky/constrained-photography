@@ -60,6 +60,8 @@ const ExperimentPage: React.FC<ExperimentPageProps> = ({
   const setIdx = setVeiwingIdx ?? setLocalVeiwingIdx;
   const currentIdx = setVeiwingIdx ? itemVeiwingIdx : veiwingIdx;
 
+  const viewingTime = 30; 
+
   return (
     <>
       {page === "prompt" && (
@@ -84,7 +86,7 @@ const ExperimentPage: React.FC<ExperimentPageProps> = ({
           <CenteringDiv>
             <h1>Please observe the item</h1>
             <MyTimer
-              timeS={5}
+              timeS={viewingTime}
               onExpire={() => {
                 continueExperiment(
                   setIdx,
@@ -106,7 +108,7 @@ const ExperimentPage: React.FC<ExperimentPageProps> = ({
         <>
           <TopBarComponent>
             <MyTimer
-              timeS={5}
+              timeS={viewingTime}
               onExpire={() => {
                 continueExperiment(
                   setIdx,

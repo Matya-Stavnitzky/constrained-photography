@@ -18,15 +18,27 @@ const MathQuestion = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <p>
-          What is {num1} x {num2}?
-        </p>
-        <div style={{ display: "flex", gap: "1vw" }}>
-          <input type="number" inputMode="numeric" ref={answerRef} />
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <p>
+            What is {num1} x {num2}?
+          </p>
+          <div style={{ display: "flex", gap: "1vw" }}>
+            <input
+              type="number"
+              inputMode="numeric"
+              ref={answerRef}
+              onFocus={(e) => {
+                setTimeout(() => {
+                  e.target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  });
+                }, 100); // slight delay helps on mobile
+              }}
+            />
+            <button type="submit">Submit</button>
+          </div>
+        </form>
     </div>
   );
 };

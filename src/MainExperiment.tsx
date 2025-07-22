@@ -18,6 +18,7 @@ import FullscreenButton from "./components/buttons/FullScreenButton";
 import EndPage from "./experimentPages/EndPage";
 import DemographicsPage from "./experimentPages/DemographicsPage";
 import KeyboardAwareScrollContainer from "./components/KeyboardAwareScrollContainer";
+import PostSurveyPage from "./experimentPages/PostSurveyPage";
 
 const getBools = (maxItems: number) => {
   //Make randomized array of booleans, where 1/2 are true
@@ -292,6 +293,15 @@ const Experiment = () => {
             sessionId={sessionId.current}
             participantId={userId.current}
           ></RecallPage>
+        )}
+
+        {visiblePage === "PostSurvey" && (
+          <>
+            <PostSurveyPage
+              setVisiblePage={setVisiblePage}
+              docRef={getDocRef()}
+            ></PostSurveyPage>
+          </>
         )}
 
         {visiblePage === "end" && <EndPage></EndPage>}

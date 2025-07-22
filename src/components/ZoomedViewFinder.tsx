@@ -1,7 +1,6 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState, type Dispatch, type SetStateAction } from "react";
 import { Camera, type CameraType } from "react-camera-pro";
 import styled from "styled-components";
-import FullscreenButton from "./buttons/FullScreenButton";
 import ImageDisplayPage from "./ImageDisplayPage";
 import BottomBarComponent from "./BottomBarComponent";
 
@@ -19,7 +18,23 @@ const CameraContainer = styled.div`
   overflow: hidden;
 `;
 
-const ZoomedViewFinder = () => {
+type ZoomedFinderProps = {
+  showImagePage?: boolean;
+  displayImagePageSetter?: Dispatch<SetStateAction<boolean>>;
+  participantId?: string;
+  sessionId?: string;
+  logging: boolean;
+  itemId?: string;
+};
+
+const ZoomedViewFinder: React.FC<ZoomedFinderProps> = ({
+  // showImagePage,
+  // displayImagePageSetter,
+  logging = false,
+  participantId,
+  sessionId,
+  itemId,
+}) => {
   const zoomedCamera = useRef<CameraType>(null);
   const regCamera = useRef<CameraType>(null);
   const takenPhotos = useRef<string[]>([]);
@@ -34,37 +49,38 @@ const ZoomedViewFinder = () => {
 
   return (
     <div>
-      <FullscreenButton>
-        {/* Renderes ShowImages Page */}
-        {showImages && (
-          <ImageDisplayPage
-            takenPhotos={takenPhotos}
+      {/* Renderes ShowImages Page */}
+      {showImages && (
+        <ImageDisplayPage
+          takenPhotos={takenPhotos}
+          setShowImages={setShowImages}
+        ></ImageDisplayPage>
+      )}
+
+      {/* Renders photo page */}
+      {!showImages && (
+        <>
+          <Camera ref={regCamera} />
+
+          <CameraContainer>
+            <Camera ref={zoomedCamera} aspectRatio={2 / 8} />
+          </CameraContainer>
+
+          <BottomBarComponent
+            passedCamera={regCamera}
             setShowImages={setShowImages}
-          ></ImageDisplayPage>
-        )}
-
-        {/* Renders photo page */}
-        {!showImages && (
-          <>
-            <Camera ref={regCamera} />
-
-            <CameraContainer>
-              <Camera ref={zoomedCamera} aspectRatio={2 / 8} />
-            </CameraContainer>
-
-            <BottomBarComponent
-              logging={false}
-              passedCamera={regCamera}
-              setShowImages={setShowImages}
-              takenPhotos={takenPhotos}
-              changeCameraFunction={() => {
-                regCamera.current?.switchCamera();
-                zoomedCamera.current?.switchCamera();
-              }}
-            ></BottomBarComponent>
-          </>
-        )}
-      </FullscreenButton>
+            takenPhotos={takenPhotos}
+            logging={logging}
+            participantId={participantId}
+            sessionId={sessionId}
+            itemId={itemId}
+            changeCameraFunction={() => {
+              regCamera.current?.switchCamera();
+              zoomedCamera.current?.switchCamera();
+            }}
+          ></BottomBarComponent>
+        </>
+      )}
     </div>
   );
 };

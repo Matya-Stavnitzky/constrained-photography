@@ -13,32 +13,34 @@ const MathQuestion = () => {
       setNum1(Math.floor(Math.random() * 13));
       setNum2(Math.floor(Math.random() * 13));
       answerRef.current!.value = "";
+    } else {
+      answerRef.current!.value = "";
     }
   };
 
   return (
     <div>
-        <form onSubmit={handleSubmit}>
-          <p>
-            What is {num1} x {num2}?
-          </p>
-          <div style={{ display: "flex", gap: "1vw" }}>
-            <input
-              type="number"
-              inputMode="numeric"
-              ref={answerRef}
-              onFocus={(e) => {
-                setTimeout(() => {
-                  e.target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center",
-                  });
-                }, 100); // slight delay helps on mobile
-              }}
-            />
-            <button type="submit">Submit</button>
-          </div>
-        </form>
+      <form onSubmit={handleSubmit}>
+        <p>
+          What is {num1} x {num2}?
+        </p>
+        <div style={{ display: "flex", gap: "1vw" }}>
+          <input
+            type="number"
+            inputMode="numeric"
+            ref={answerRef}
+            onFocus={(e) => {
+              setTimeout(() => {
+                e.target.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
+              }, 100); // slight delay helps on mobile
+            }}
+          />
+          <button type="submit">Submit</button>
+        </div>
+      </form>
     </div>
   );
 };
@@ -50,7 +52,7 @@ type DistractorPageProps = {
   setVisiblePage: Dispatch<SetStateAction<string>>;
 };
 
-const DistractorPage: React.FC<DistractorPageProps> = ({ setVisiblePage }) => {
+  const DistractorPage: React.FC<DistractorPageProps> = ({ setVisiblePage }) => {
   const [distractorNav, setDistractorNav] = useState<string>("EndVeiwing");
   const distractorTime = 60 * 3; // 3 minutes
 

@@ -13,7 +13,6 @@ function continueExperiment(
   exitTo: string
 ) {
   {
-    //TODO: CHECK IF THE VIBRATION WORKS ON A PHONE
     navigator.vibrate(500);
     setIdx(idx + 1);
 
@@ -51,6 +50,10 @@ const ExperimentPage: React.FC<ExperimentPageProps> = ({
   itemVeiwingIdx = 0, // Default to 0 if not provided
   exitTo = "distractor", // Default exit page if not provided
 }) => {
+  //EXPERIMENT PARAMETERS
+  const viewingTime = 30;
+
+  // states for visible page and item being viewed
   const [page, setPage] = React.useState(`prompt`);
   const [veiwingIdx, setLocalVeiwingIdx] = React.useState<number>(
     itemVeiwingIdx ?? 0
@@ -60,7 +63,16 @@ const ExperimentPage: React.FC<ExperimentPageProps> = ({
   const setIdx = setVeiwingIdx ?? setLocalVeiwingIdx;
   const currentIdx = setVeiwingIdx ? itemVeiwingIdx : veiwingIdx;
 
-  const viewingTime = 30; 
+  // Disable button for a breif period so people don't click it after the transition if they are taking photos
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
+
+  React.useEffect(() => {
+    if (page === "prompt") {
+      setButtonDisabled(true);
+      const timer = setTimeout(() => setButtonDisabled(false), 500); 
+      return () => clearTimeout(timer);
+    }
+  }, [page]);
 
   return (
     <>
@@ -68,6 +80,7 @@ const ExperimentPage: React.FC<ExperimentPageProps> = ({
         <CenteringDiv>
           <h1>Go to item number {itemOrder.at(currentIdx)}</h1>
           <button
+            disabled={buttonDisabled}
             onClick={() => {
               if (itemPhotography[currentIdx]) {
                 setPage("photograph");

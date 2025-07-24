@@ -57,7 +57,7 @@ const InstructionPage: React.FC<CenteredPageProps> = ({ setVisiblePage }) => {
           </p>
           <ExperimentPage
             logging={false}
-            itemOrder={[0, 0.5]}
+            itemOrder={[0, 0]}
             itemPhotography={[false, true]}
             nextPage={InstructionPageNavigation}
             exitTo="InstructionsAgain"
@@ -70,7 +70,9 @@ const InstructionPage: React.FC<CenteredPageProps> = ({ setVisiblePage }) => {
           <CenteringDiv>
             <h1>Instructions</h1>
             <p>
-              When you are ready, click the button below to start the experiment
+              Please ask the experimenter if you have any questions about the
+              experiment. When you are ready, click the button below to start
+              the experiment
             </p>
             <button
               onClick={() => {

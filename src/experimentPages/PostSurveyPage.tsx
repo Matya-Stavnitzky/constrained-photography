@@ -91,7 +91,7 @@ const PostSurveyPage: React.FC<PostSurveyPageProps> = ({
           </div>
 
           <div style={divStyle}>
-            <label>
+            <label style={{ display: "block", width: "100%" }}>
               <strong>
                 How much did you enjoy the photography
                 technique?
@@ -118,10 +118,10 @@ const PostSurveyPage: React.FC<PostSurveyPageProps> = ({
           </div>
 
           <div style={divStyle}>
-            <label>
-              <strong>
+            <label style={{ display: "block", width: "100%" }}>
+                <strong>
                 How attached did you feel to your photos?
-              </strong>
+                </strong>
               <br />
               <input
                 type="range"

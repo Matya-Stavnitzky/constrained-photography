@@ -51,7 +51,7 @@ const ExperimentPage: React.FC<ExperimentPageProps> = ({
   exitTo = "distractor", // Default exit page if not provided
 }) => {
   //EXPERIMENT PARAMETERS
-  const viewingTime = 30;
+  const viewingTime = 20;
 
   // states for visible page and item being viewed
   const [page, setPage] = React.useState(`prompt`);

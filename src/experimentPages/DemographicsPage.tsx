@@ -272,7 +272,9 @@ const DemographicsPage: React.FC<DemographicsPageProps> = ({
             >
               {showError}
             </div>
-            <button type="submit">Submit</button>
+            <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+              <button type="submit">Submit</button>
+            </div>
           </form>
         </CenteringDiv>
       </KeyboardAwareScrollContainer>

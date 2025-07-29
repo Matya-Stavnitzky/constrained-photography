@@ -16,6 +16,7 @@ const MathQuestion = () => {
     } else {
       answerRef.current!.value = "";
     }
+    answerRef.current?.focus();
   };
 
   return (
